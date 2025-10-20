@@ -1,11 +1,3 @@
-Sure! Below is a fully structured and cleaned-up version of the content you provided. It includes:
-
-* A **Table of Contents** for navigation
-* Clearly separated **sections** with **headings**
-* A **step-by-step walkthrough** for creating a project, understanding what's created, accessing organization settings, and adding users
-
----
-
 # 🚀 Getting Started with Azure DevOps
 
 ### A Beginner-Friendly Walkthrough

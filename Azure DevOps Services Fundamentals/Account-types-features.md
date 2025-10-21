@@ -1,7 +1,3 @@
-Here's your comprehensive, **well-organized Azure DevOps guide** in **Markdown format**, complete with a **Table of Contents** and all the sections clearly structured.
-
----
-
 # Azure DevOps: Account Types, Billing, and Permissions Guide
 
 ## Table of Contents

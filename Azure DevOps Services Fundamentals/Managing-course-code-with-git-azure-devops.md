@@ -182,3 +182,88 @@ There’s **no single right answer**. It depends on your **team’s needs**, **w
 > 🔖 **Recommendation**:
 > If you don’t have a strong reason to use TFVC, **start with Git**.
 
+# Git and Azure DevOps
+
+Let’s talk about the **basics of using Git with Azure DevOps**. This is a quick tour to help you understand the core workflow.
+
+> 💡 **Looking for a deeper dive?**
+> Check out:
+
+* *DevOps Skills for Developers with Visual Studio and TFS 2017*
+  → Module: **Consolidating Your Team's Source Code with Version Control**
+* *Feature Flags: Simplify Branching and Deployments*
+  → For advanced Git branching strategies
+
+---
+
+## 🧠 Local vs Remote
+
+Before diving in, it’s essential to understand:
+
+| Term       | Meaning                                                                                  |
+| ---------- | ---------------------------------------------------------------------------------------- |
+| **Local**  | Your working copy on your **local machine** — includes changes you've made and committed |
+| **Remote** | The **server copy**, typically hosted in **Azure DevOps**, shared with your team         |
+
+---
+
+## 🔁 Basic Git Workflow with Azure DevOps
+
+### 1. **Clone**
+
+* Run **once per repository**
+* Downloads the **entire history** of the repository (not just the latest version)
+* Creates a **full local copy** on your machine
+
+```bash
+git clone https://dev.azure.com/your-org/project/_git/repo-name
+```
+
+---
+
+### 2. **Work Locally**
+
+* Perform any of the following on your files:
+
+  * `add` new files
+  * `edit` existing files
+  * `delete` files
+
+### 3. **Commit**
+
+* A **local check-in**
+* Saves a snapshot of your changes to your local Git repository
+
+```bash
+git add .
+git commit -m "Your descriptive commit message"
+```
+
+> 🔄 You can commit **as often as you like**, even while disconnected from the network.
+
+---
+
+### 4. **Push**
+
+* Sends all your local commits to the **remote repository** (Azure DevOps)
+* Makes your changes **visible to the rest of the team**
+
+```bash
+git push origin main
+```
+
+> 📌 `origin` = default name for the remote
+> 📌 `main` = default branch (could be `master` or any other)
+
+---
+
+## ✅ Summary of Git Flow in Azure DevOps
+
+```mermaid
+graph LR
+A[Clone from Azure DevOps] --> B[Work Locally (Add/Edit/Delete)]
+B --> C[Commit Locally]
+C --> D[Push to Azure DevOps]
+```
+
+> That’s the **basic Git flow** in Azure DevOps.

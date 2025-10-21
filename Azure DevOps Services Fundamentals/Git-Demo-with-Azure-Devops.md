@@ -349,6 +349,120 @@ BLAH, BLAH, BLAH!
 | **Push**    | Sends your **local commits** to the remote repository                           |
 | **Sync**    | Fetch + Pull + Push in one action                                               |
 
+# 🧩 Git Demo (Part 4 of 4): Sharing Changes Back to Azure DevOps
+
+In this final part of the Git demo, you'll learn how to:
+
+* Fix a bug in code
+* Associate your Git commit with a **work item**
+* Push your changes to Azure DevOps
+* View the **link between commits and work items**
+
+---
+
+## 🔧 Step 1: Create a Work Item in Azure DevOps
+
+1. Go to your Azure DevOps project.
+2. Navigate to **Boards > Work Items**.
+3. Click **New Work Item** → choose **Issue** (or Bug, Task, etc.)
+4. Fill in the details:
+
+   * **Title**: `Hello world doesn't say hello world`
+   * **Status**: Change to `Doing`
+   * **Assigned To**: Yourself
+5. Click **Save**
+
+   > 🔢 Note the Work Item ID (e.g., `#1`) – you’ll use this to link your commit.
+
+---
+
+## 🖥 Step 2: Make Code Changes in Visual Studio
+
+1. Open your project in **Visual Studio**
+2. Locate the line:
+
+   ```csharp
+   // Console.WriteLine("Hello World");
+   ```
+3. Uncomment or fix it:
+
+   ```csharp
+   Console.WriteLine("Hello World");
+   ```
+4. **Build** the solution to confirm it compiles.
+
+---
+
+## 🔗 Step 3: Associate the Work Item with the Commit
+
+There are two ways to link your code changes to the work item:
+
+### ✅ Option 1: Use Team Explorer GUI
+
+1. In **Team Explorer**, go to **Work Items**
+2. Right-click the work item → **Relate to Changes**
+3. Now, go to **Changes** – it should show the work item under **Related Work Items**
+
+### 🧪 Option 2: Add Work Item ID in Commit Message
+
+```bash
+git commit -m "Fix the bug #1"
+```
+
+> Replace `#1` with your actual work item ID. This automatically links the commit during push.
+
+---
+
+## 💾 Step 4: Commit and Push Changes
+
+### Option A: From Team Explorer (Manual)
+
+1. In **Team Explorer > Changes**, enter a commit message:
+
+   ```
+   Fixed the bug
+   ```
+
+2. Click **Commit All** to save locally.
+
+3. Go to **Sync**
+
+   * Under **Outgoing Commits**, click **Push** to send the changes to Azure DevOps.
+
+### Option B: Commit and Push in One Step
+
+* Choose **Commit All and Push** from the Changes tab.
+
+---
+
+## 🧠 Step 5: Verify Commit in Azure DevOps
+
+1. Go to **Repos > History**
+
+   * You should see a new commit: `Fixed the bug`
+
+2. Click on the commit
+
+   * View code changes (diff)
+   * Confirm that it's associated with Work Item `#1`
+
+3. Go to **Boards > Work Items**
+
+   * Open the work item
+   * You'll now see a **linked commit**
+   * Mark the issue as **Done** if completed
+
+---
+
+## 🧵 Recap
+
+| Task                     | Git                   | Azure DevOps                   |
+| ------------------------ | --------------------- | ------------------------------ |
+| Create Work Item         | N/A                   | Boards                         |
+| Modify Code              | ✅                     |                                |
+| Link Commit to Work Item | `#1` in commit or GUI | Boards ↔ Repos                 |
+| Commit & Push            | `Commit`, then `Push` | Shows up in History            |
+| Track Work               |                       | Work Item shows commit history |
 
 
 

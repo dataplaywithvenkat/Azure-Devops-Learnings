@@ -108,3 +108,252 @@ Your repo now includes:
 * `.gitignore`
 * `README.md` (optional)
 
+
+# Git Demo (Part 2 of 4): Connect Visual Studio to a Git Repository in Azure DevOps
+
+In this part of the demo, we’ll:
+
+* Connect **Visual Studio** to the Git repo we created in **Part 1**
+* Clone the repository to our local machine
+* Add a new console app
+* Commit changes locally
+* Review the commit locally (but not push yet!)
+
+---
+
+## 🔗 Step 1: Clone the Git Repository
+
+1. Go to your Azure DevOps organization:
+
+   ```
+   https://dev.azure.com/{your-org}
+   ```
+
+   Example:
+
+   ```
+   https://dev.azure.com/benday-ps
+   ```
+
+2. Open the project you created in Part 1 (`git-demo`), then:
+
+   * Navigate to **Repos** (left-hand menu)
+   * Click **Clone** (upper right corner)
+
+3. In the Clone window:
+
+   * Choose **Visual Studio** as the cloning option
+   * (Alternatively, copy the HTTPS URL for use in command line)
+
+4. Visual Studio will open a **Clone Repository** dialog:
+
+   * Choose a local path where you want the repo stored
+   * Click **Clone**
+
+---
+
+## 🧭 Step 2: Explore the Cloned Repo in Visual Studio
+
+Once the repo is cloned:
+
+* Visual Studio opens in **Folder View**
+* You'll see `.gitignore` and `README.md` (created in Part 1)
+
+### Optional: Switch to Team Explorer
+
+* If **Team Explorer** is not open:
+
+  * Go to `View > Team Explorer` or search for it in the top search bar
+* Team Explorer allows you to interact with:
+
+  * Azure DevOps
+  * Git version control
+  * Builds, work items, etc.
+
+---
+
+## 🛠️ Step 3: Create a Console App Inside the Repo
+
+1. In **Team Explorer**, scroll to **Solutions** and click **New**.
+2. Create a new **Console Application**.
+
+   * Name it: `Benday.HelloWorld`
+   * Click **Create**
+
+---
+
+## 📝 Step 4: Make a Change and Commit
+
+1. Visual Studio shows new files in the **Solution Explorer**.
+2. Optionally, remove or comment out `"Hello, World!"` for a change.
+3. **Build** the solution to ensure everything compiles.
+4. Go to **Team Explorer > Changes**:
+
+   * You'll see all modified/added files
+   * Add a commit message, e.g.,:
+
+     ```
+     Created hello world
+     ```
+   * Click **Commit All**
+
+> ✅ You’ve now committed changes **locally**.
+> They are NOT yet pushed to Azure DevOps.
+
+---
+
+## 🧪 Step 5: Verify Local Commit
+
+1. In Team Explorer, click the commit ID (e.g., `#1a2b3c`).
+2. You'll see:
+
+   * Commit message
+   * Files included in the commit
+   * Commit timestamp
+
+---
+
+## 🖥️ Step 6: Check Azure DevOps (Remote Repo)
+
+1. In Team Explorer, click **Home > Web Portal**.
+
+2. Navigate to:
+
+   * **Repos > Files**
+   * Then go to **History**
+
+3. What do you see?
+
+   * Only the **initial commit**
+   * ❌ Your local commit is **not there yet** — because it hasn't been **pushed** to the server.
+
+---
+
+## ⚠️ Important Concept: Local vs Remote
+
+| Action     | Description                                 |
+| ---------- | ------------------------------------------- |
+| **Commit** | Saves changes **locally**                   |
+| **Push**   | Uploads local commits to **Azure DevOps**   |
+| **Pull**   | Downloads new changes from **Azure DevOps** |
+
+
+# Git Demo (Part 3 of 4): Getting Latest from Azure DevOps
+
+In this part, we'll:
+
+* Simulate a **server-side change** using the Azure DevOps web interface
+* Use **Fetch** and **Pull** from Visual Studio to bring those changes locally
+
+---
+
+## 📝 Step 1: Make a Change in Azure DevOps Web Interface
+
+1. Go to your Azure DevOps project:
+
+   ```
+   https://dev.azure.com/{your-org}/{your-project}
+   ```
+
+2. Navigate to:
+
+   * **Repos > Files**
+   * Click on the `README.md` file
+
+3. Click **Edit**, then make a change:
+
+   ```md
+   BLAH, BLAH, BLAH!
+   ```
+
+4. Scroll down and enter a commit message:
+
+   ```
+   Updated README.md to say blah blah blah
+   ```
+
+5. Click **Commit**.
+
+### ✅ Result:
+
+You now have a new commit on the server that **does not exist on your local machine yet**.
+
+---
+
+## 🧭 Step 2: Open Visual Studio and Sync
+
+1. Open **Visual Studio** and navigate to:
+
+   ```
+   View > Team Explorer
+   ```
+
+2. In **Team Explorer**, click on **Sync**.
+
+This view shows:
+
+* **Outgoing Commits**: Commits on your machine not yet pushed
+* **Incoming Commits**: Commits on the server not yet pulled down
+
+---
+
+## 🔄 Step 3: Fetch and Pull
+
+### Option 1: One-click Sync (Not Recommended for Beginners)
+
+* Clicking **Sync** does both pull & push in one step.
+* Can be confusing if you’re worried about automatic merges.
+
+### ✅ Recommended: Manual `Fetch` + `Pull`
+
+1. Click **Fetch**:
+
+   * This checks the server for new commits.
+   * You'll see the server-side commit (e.g., “Updated README.md…”).
+
+2. Optionally:
+
+   * Right-click on the fetched commit → **View Commit Details** (to inspect the change)
+
+3. Click **Pull**:
+
+   * This downloads the commit from the server and merges it into your local repo.
+
+---
+
+## 🔍 Step 4: Verify the Changes Locally
+
+1. Go to **Solution Explorer**
+2. Switch to **Folder View** (if not already in that view)
+3. Open `README.md`
+
+You should now see:
+
+```md
+BLAH, BLAH, BLAH!
+```
+
+### ✅ Merge Successful!
+
+* You’ve now pulled server-side changes into your local environment.
+* Your local commits (e.g., `Created hello world`) still exist but are not yet pushed.
+
+---
+
+## 🧠 Key Concepts Recap
+
+| Git Command | Purpose                                                                         |
+| ----------- | ------------------------------------------------------------------------------- |
+| **Fetch**   | Retrieves metadata about new commits from the server — *but doesn't merge them* |
+| **Pull**    | Retrieves and **merges** new commits from the server                            |
+| **Push**    | Sends your **local commits** to the remote repository                           |
+| **Sync**    | Fetch + Pull + Push in one action                                               |
+
+
+
+
+
+
+
+
+
